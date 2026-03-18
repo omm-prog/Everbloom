@@ -156,7 +156,7 @@ export default function App() {
         {/* Canvas */}
         <div
           ref={canvasRef}
-          className={`relative flex items-center justify-center overflow-hidden transition-colors duration-700 min-h-[50vh] lg:min-h-0 lg:flex-1 shrink-0 ${isDark ? 'bg-[#1e1812]' : 'bg-[#fdfaf6]'}`}
+          className={`relative flex-1 flex items-center justify-center overflow-hidden transition-colors duration-700 min-h-[50vh] lg:min-h-0 shrink-0 ${isDark ? 'bg-[#1e1812]' : 'bg-[#fdfaf6]'}`}
         >
           {/* Soft ambient orb */}
           <div
