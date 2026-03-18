@@ -1,39 +1,48 @@
 import LZString from 'lz-string';
 
-// Minify flower array
-function shortenFlowers(flowers: any[]) {
-  return flowers.map(f => ({
-    i: f.id.substring(0, 4), // shorter ID
-    t: f.type,
-    c: f.color === 'default' ? undefined : f.color, // omit if default
-    x: Math.round(f.x),
-    y: Math.round(f.y),
-    r: Math.round(f.rotation),
-    s: Number(f.scale.toFixed(2)),
-    z: f.zIndex
-  }));
+const T_MAP: Record<string, string> = { rose: 'r', tulip: 't', sunflower: 's', lily: 'l', daisy: 'd' };
+const T_INV: Record<string, string> = { r: 'rose', t: 'tulip', s: 'sunflower', l: 'lily', d: 'daisy' };
+
+// Pack flower array into a single tiny string
+// format: "t,x,y,r,s,z,c_t,x,y,r,s,z,c"
+function packFlowers(flowers: any[]) {
+  return flowers.map(f => {
+    const t = T_MAP[f.type] || 'r';
+    const c = f.color === 'default' ? '' : f.color.replace('#', '');
+    return `${t},${Math.round(f.x)},${Math.round(f.y)},${Math.round(f.rotation)},${Number(f.scale.toFixed(2))},${f.zIndex},${c}`;
+  }).join('_');
 }
 
-// Expand flower array back to normal
-function expandFlowers(minified: any[]) {
-  return minified.map(f => ({
-    id: f.i + Math.random().toString(36).substr(2, 4), // append random to ensure uniqueness if needed
-    type: f.t,
-    color: f.c || 'default',
-    x: f.x,
-    y: f.y,
-    rotation: f.r,
-    scale: f.s,
-    zIndex: f.z
-  }));
+// Expand packed string back to array
+function unpackFlowers(packed: string | any[]) {
+  if (!packed) return [];
+  // if older minified array format, fallback:
+  if (Array.isArray(packed)) {
+    return packed.map(f => ({
+      id: f.i || Math.random().toString(36).substr(2, 4),
+      type: f.t, color: f.c || 'default',
+      x: f.x, y: f.y, rotation: f.r, scale: f.s, zIndex: f.z
+    }));
+  }
+  
+  return packed.split('_').map((str, i) => {
+    const [t, x, y, r, s, z, c] = str.split(',');
+    return {
+      id: `f${i}_${Math.random().toString(36).substr(2, 4)}`,
+      type: T_INV[t] || 'rose',
+      color: c ? `#${c}` : 'default',
+      x: Number(x), y: Number(y),
+      rotation: Number(r), scale: Number(s), zIndex: Number(z)
+    };
+  });
 }
 
 export function encodeAppState(state: any): string {
   try {
-    // 1. Minify state object keys to single letters to save bytes
+    // 1. Minify state object keys to save bytes
     const minified = {
       b: {
-        f: shortenFlowers(state.bouquet.flowers),
+        f: packFlowers(state.bouquet.flowers),
         w: state.bouquet.wrapper,
         r: state.bouquet.ribbonColor
       },
@@ -63,7 +72,7 @@ export function decodeAppState(encoded: string): any | null {
       if (parsed.b) {
         return {
           bouquet: {
-            flowers: expandFlowers(parsed.b.f || []),
+            flowers: unpackFlowers(parsed.b.f || ''),
             wrapper: parsed.b.w,
             ribbonColor: parsed.b.r
           },
