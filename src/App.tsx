@@ -105,21 +105,9 @@ export default function App() {
           <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isDark ? 'bg-[#3d2f24]' : 'bg-[#f0ebe4]'}`}>
             <Flower2 size={16} className="text-[#c8938a]" />
           </div>
-          <div className="flex items-baseline gap-2">
-            <span className={`font-serif text-xl tracking-wide font-semibold ${isDark ? 'text-[#f0ebe4]' : 'text-[#3d2f24]'}`}>
-              Everbloom
-            </span>
-            {!isReadOnly && (
-              <a 
-                href="https://github.com/omm-prog" 
-                target="_blank" 
-                rel="noreferrer" 
-                className={`text-[9px] font-medium tracking-widest uppercase px-2 py-0.5 rounded-full border transition-colors ${isDark ? 'border-[#3d2f24] text-[#e4ddd5]/70 hover:bg-[#3d2f24] hover:text-[#f0ebe4]' : 'border-[#e4ddd5] text-[#7a6355]/70 hover:bg-[#e4ddd5]/50 hover:text-[#3d2f24]'}`}
-              >
-                by Om Chauhan
-              </a>
-            )}
-          </div>
+          <span className={`font-serif text-xl tracking-wide font-semibold ${isDark ? 'text-[#f0ebe4]' : 'text-[#3d2f24]'}`}>
+            Everbloom
+          </span>
         </button>
 
         <div className="flex items-center gap-3">
@@ -213,13 +201,26 @@ export default function App() {
               setMessage={setMessage}
               isDark={isDark}
             />
-            {/* Creator Footer in Editor */}
-            <div className={`py-4 text-center text-[10px] font-medium tracking-widest uppercase transition-colors ${isDark ? 'text-[#e4ddd5]/40' : 'text-[#7a6355]/40'}`}>
-              Created by <a href="https://github.com/omm-prog" target="_blank" rel="noreferrer" className="hover:underline">Om Chauhan</a>
-            </div>
+
           </aside>
         )}
       </main>
+
+      {/* ── Footer ── */}
+      {!isReadOnly && (
+        <footer className={`shrink-0 py-3 px-6 flex items-center justify-center gap-2 text-[10px] tracking-[0.2em] uppercase transition-colors duration-700 ${isDark ? 'bg-[#1a1410] border-t border-[#3d2f24] text-[#e4ddd5]/35' : 'bg-[#f8f5f2] border-t border-[#e4ddd5] text-[#7a6355]/40'}`}>
+          <Heart size={8} className="text-[#c8938a]/50" fill="currentColor" />
+          <span className="font-serif italic">Crafted with love by</span>
+          <a
+            href="https://github.com/omm-prog"
+            target="_blank"
+            rel="noreferrer"
+            className={`font-serif not-italic font-semibold transition-colors ${isDark ? 'text-[#e4ddd5]/55 hover:text-[#c8938a]' : 'text-[#7a6355]/60 hover:text-[#c8938a]'}`}
+          >
+            Om Chauhan
+          </a>
+        </footer>
+      )}
 
       {shareUrl && (
         <ShareModal shareUrl={shareUrl} onClose={() => setShareUrl(null)} isDark={isDark} />
