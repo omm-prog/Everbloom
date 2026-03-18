@@ -2,6 +2,8 @@
 
 > A premium, client-side web application for creating and sharing beautiful digital flower bouquets.
 
+**🌟 Live Demo:** [https://everbloom-chi.vercel.app/](https://everbloom-chi.vercel.app/)
+
 Everbloom is a completely serverless, zero-database web application that allows users to design elegant, customized digital flower bouquets and share them instantly via URL. The entire state of the bouquet and attached message is encoded directly into the shareable link.
 
 ## ✨ Features
