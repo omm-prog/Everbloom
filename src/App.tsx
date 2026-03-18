@@ -105,9 +105,21 @@ export default function App() {
           <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors ${isDark ? 'bg-[#3d2f24]' : 'bg-[#f0ebe4]'}`}>
             <Flower2 size={16} className="text-[#c8938a]" />
           </div>
-          <span className={`font-serif text-xl tracking-wide font-semibold ${isDark ? 'text-[#f0ebe4]' : 'text-[#3d2f24]'}`}>
-            Everbloom
-          </span>
+          <div className="flex items-baseline gap-2">
+            <span className={`font-serif text-xl tracking-wide font-semibold ${isDark ? 'text-[#f0ebe4]' : 'text-[#3d2f24]'}`}>
+              Everbloom
+            </span>
+            {!isReadOnly && (
+              <a 
+                href="https://github.com/omm-prog" 
+                target="_blank" 
+                rel="noreferrer" 
+                className={`text-[9px] font-medium tracking-widest uppercase px-2 py-0.5 rounded-full border transition-colors ${isDark ? 'border-[#3d2f24] text-[#e4ddd5]/70 hover:bg-[#3d2f24] hover:text-[#f0ebe4]' : 'border-[#e4ddd5] text-[#7a6355]/70 hover:bg-[#e4ddd5]/50 hover:text-[#3d2f24]'}`}
+              >
+                by Om Chauhan
+              </a>
+            )}
+          </div>
         </button>
 
         <div className="flex items-center gap-3">
