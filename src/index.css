@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-handwriting: 'Dancing Script', cursive;
+
+  --color-cream-50: #fdfaf6;
+  --color-cream-100: #f8f5f2;
+  --color-cream-200: #f0ebe4;
+  --color-cream-300: #e4ddd5;
+  --color-cream-400: #c9bfb5;
+  --color-warm-900: #2c2118;
+  --color-warm-800: #3d2f24;
+  --color-warm-700: #5c4a3d;
+  --color-warm-600: #7a6355;
+  --color-rose-muted: #c8938a;
+  --color-rose-soft: #e8b4ae;
+  --color-rose-blush: #f5d9d5;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream-100);
+  color: var(--color-warm-800);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans);
+}
+
+/* Dark theme overrides */
+html.dark body {
+  background-color: #1a1410;
+  color: #f0ebe4;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #e4ddd5; border-radius: 999px; }
+html.dark ::-webkit-scrollbar-thumb { background: #3d2f24; }
+
+::selection { background-color: #f5d9d5; }
+
+/* Paper texture for note card */
+.paper-texture {
+  background-color: #fdfaf6;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 27px,
+      rgba(180, 160, 140, 0.08) 27px,
+      rgba(180, 160, 140, 0.08) 28px
+    );
+}
+
+html.dark .paper-texture {
+  background-color: #2c2118;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 27px,
+      rgba(255,255,255,0.04) 27px,
+      rgba(255,255,255,0.04) 28px
+    );
+}
+
+/* Bouquet canvas soft vignette */
+.canvas-vignette {
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(240,235,228,0.5) 100%);
+}
+html.dark .canvas-vignette {
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(26,20,16,0.6) 100%);
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Gentle breathing animation for orb */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.08); opacity: 0.55; }
+}
+.breathe { animation: breathe 6s ease-in-out infinite; }
+
+/* Sidebar section dividers */
+.section-divider {
+  border-top: 1px dashed #e4ddd5;
+}
+html.dark .section-divider { border-color: #3d2f24; }
