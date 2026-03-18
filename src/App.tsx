@@ -151,12 +151,12 @@ export default function App() {
       </header>
 
       {/* ── Main ── */}
-      <main className="flex-1 flex flex-col lg:flex-row gap-0 min-h-0 overflow-hidden">
+      <main className="flex-1 flex flex-col lg:flex-row gap-0 min-h-0 overflow-y-auto lg:overflow-hidden">
 
         {/* Canvas */}
         <div
           ref={canvasRef}
-          className={`flex-1 relative flex items-center justify-center overflow-hidden transition-colors duration-700 ${isDark ? 'bg-[#1e1812]' : 'bg-[#fdfaf6]'}`}
+          className={`relative flex items-center justify-center overflow-hidden transition-colors duration-700 min-h-[50vh] lg:min-h-0 lg:flex-1 shrink-0 ${isDark ? 'bg-[#1e1812]' : 'bg-[#fdfaf6]'}`}
         >
           {/* Soft ambient orb */}
           <div
@@ -193,7 +193,7 @@ export default function App() {
 
         {/* Sidebar */}
         {!isReadOnly && (
-          <aside className={`w-full lg:w-[380px] shrink-0 flex flex-col overflow-hidden transition-colors duration-700 ${isDark ? 'bg-[#1a1410] border-l border-[#3d2f24]' : 'bg-[#f8f5f2] border-l border-[#e4ddd5]'}`}>
+          <aside className={`w-full lg:w-[380px] shrink-0 flex flex-col overflow-hidden transition-colors duration-700 lg:border-l ${isDark ? 'bg-[#1a1410] border-t lg:border-t-0 border-[#3d2f24]' : 'bg-[#f8f5f2] border-t lg:border-t-0 border-[#e4ddd5]'}`}>
             <EditorPanel
               bouquet={bouquet}
               setBouquet={setBouquet}
