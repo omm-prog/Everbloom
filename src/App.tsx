@@ -184,9 +184,14 @@ export default function App() {
           )}
 
           {isReadOnly && (
-            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-10 pointer-events-none">
-              <Heart size={10} className="text-[#c8938a]/50" fill="currentColor" />
-              <span className="font-serif text-xs tracking-widest text-[#c8938a]/50 italic">Made with Everbloom</span>
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-10">
+              <Heart size={10} className="text-[#c8938a]/60" fill="currentColor" />
+              <span className="font-serif text-xs tracking-widest text-[#c8938a]/80 italic">
+                Made with Everbloom by{' '}
+                <a href="https://github.com/omm-prog" target="_blank" rel="noreferrer" className="underline decoration-[#c8938a]/30 hover:text-[#c8938a] transition-colors">
+                  Om Chauhan
+                </a>
+              </span>
             </div>
           )}
         </div>
@@ -201,6 +206,10 @@ export default function App() {
               setMessage={setMessage}
               isDark={isDark}
             />
+            {/* Creator Footer in Editor */}
+            <div className={`py-4 text-center text-[10px] font-medium tracking-widest uppercase transition-colors ${isDark ? 'text-[#e4ddd5]/40' : 'text-[#7a6355]/40'}`}>
+              Created by <a href="https://github.com/omm-prog" target="_blank" rel="noreferrer" className="hover:underline">Om Chauhan</a>
+            </div>
           </aside>
         )}
       </main>
